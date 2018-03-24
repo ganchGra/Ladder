@@ -16,11 +16,9 @@ std::string SimpleLadder::type() const
 
 ///
 /// Get all vertices and their number
-GLfloat * SimpleLadder::getVertices(GLfloat centerPosX, GLfloat centerPosY, GLfloat centerPosZ, unsigned &numberOfVertices) const
+GLfloat * SimpleLadder::getVertices(GLfloat centerPosX, GLfloat centerPosY, GLfloat centerPosZ, unsigned &totPoints) const
 {
-	GLfloat distFromTheFrameLeftAndRight = numberOfSteps() * footDepth() * 0.5f;
-
-	GLfloat distFromTheFrameTopAndBottom = hightLadder() * 0.5f;
+	
 	float hight = hightLadder();
 	float width = widthLadder();
 	float stepHight = hightStep();
@@ -33,8 +31,8 @@ GLfloat * SimpleLadder::getVertices(GLfloat centerPosX, GLfloat centerPosY, GLfl
 	 * Side of the foot - 2 lines with 6 points for line -> 12 for step
 	 * Base - 7 lines with 6 points for line -> 42
 	 */
-	numberOfVertices = 24 * numberOfSteps() + 12 * numberOfSteps() + 42;
-	GLfloat * vertices = new GLfloat[numberOfVertices];
+	totPoints = 24 * numberOfSteps() + 12 * numberOfSteps() + 42;
+	GLfloat * vertices = new GLfloat[totPoints];
 
 	/* 
 	 * Base of a foot - 4 lines with 6 points for line -> 24 for step 
@@ -252,13 +250,13 @@ void SimpleLadder::save(std::string &fileName, GLfloat centerPosX, GLfloat cente
 		<< "Number of steps: " << numberOfSteps() << "\n"
 		<< "Type: " << m_type << "\n";
 
-	unsigned totalVertices;
+	unsigned totPoints;
 
-	GLfloat * vertices = getVertices(centerPosX, centerPosY, centerPosZ, totalVertices);
+	GLfloat * vertices = getVertices(centerPosX, centerPosY, centerPosZ, totPoints);
 	
-	file << "Number of vertex: " << totalVertices << "\n\n";
+	file << "Total X Y Z coordinates: " << totPoints / 3 << "\n\n";
 	size_t i = 0;
-	while (i < totalVertices)
+	while (i < totPoints)
 	{
 		file << vertices[i++] << " " << vertices[i++] << " " << vertices[i++] << "\n";
 	}
@@ -275,14 +273,14 @@ void SimpleLadder::save(std::string &fileName, GLfloat centerPosX, GLfloat cente
 void SimpleLadder::draw(GLfloat centerPosX, GLfloat centerPosY, GLfloat centerPosZ) const
 {
 	
-	unsigned totalVertex;
-	GLfloat * vertices = getVertices(centerPosX, centerPosY, centerPosZ, totalVertex);
+	unsigned totPoints;
+	GLfloat * vertices = getVertices(centerPosX, centerPosY, centerPosZ, totPoints);
 	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 	glEnableClientState(GL_VERTEX_ARRAY);
 	glColor3f(0, 1, 2);
 	glVertexPointer(3, GL_FLOAT, 0, vertices);
 
-	glDrawArrays(GL_LINES, 0, totalVertex);
+	glDrawArrays(GL_LINES, 0, totPoints);
 
 	glDisableClientState(GL_VERTEX_ARRAY);
 	delete[] vertices;
