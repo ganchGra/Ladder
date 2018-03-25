@@ -1,11 +1,7 @@
 #pragma once
 
 #include"Ladder.h"
-#include<fstream>
 #include <GL/glew.h>
-
-// GLFW
-#include <GLFW/glfw3.h>
 
 class SimpleLadder:public Ladder
 {
@@ -31,7 +27,7 @@ private:
 	/// 
 	/// Get all vertex started from initial parametar X,Y,Z
 	///
-	GLfloat * getVertices(GLfloat centerPosX, GLfloat centerPosY, GLfloat centerPosZ, unsigned &numberOfVertices) const;
+	GLfloat * getVertices(GLfloat centerPosX, GLfloat centerPosY, GLfloat centerPosZ, unsigned &totPoints) const;
 
 private:
 	

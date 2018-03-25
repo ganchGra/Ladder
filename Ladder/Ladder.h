@@ -3,7 +3,6 @@
 #include<string>
 #define GLEW_STATIC
 #include <GL/glew.h>
-#include <GLFW/glfw3.h>
 
 class Ladder
 {
@@ -49,13 +48,16 @@ public:
 	///
 	virtual void draw(GLfloat centerPosX, GLfloat centerPosY, GLfloat centerPosZ) const = 0;
 	
+	///
+	/// Save ladder data to file
+	///
 	virtual void save(std::string & fileName, GLfloat centerPosX, GLfloat centerPosY, GLfloat centerPosZ) const = 0;
 
 private:
 	///
 	/// Calculate the number of steps
 	///
-	void setTheNumberOfSteps(double hightLadder, double hightStep);
+	void setTheNumberOfSteps(float hightLadder, float hightStep);
 private:
 
 	float m_widthLadder;

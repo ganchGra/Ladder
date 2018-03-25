@@ -13,9 +13,9 @@ std::string SimpleLadder::type() const
 	return m_type;
 }
 
-
 ///
 /// Get all vertices and their number
+///
 GLfloat * SimpleLadder::getVertices(GLfloat centerPosX, GLfloat centerPosY, GLfloat centerPosZ, unsigned &totPoints) const
 {
 	
@@ -27,15 +27,15 @@ GLfloat * SimpleLadder::getVertices(GLfloat centerPosX, GLfloat centerPosY, GLfl
 
 
 	/* 
-	 * Base of a foot - 4 lines with 6 points for line -> 24 for step
-	 * Side of the foot - 2 lines with 6 points for line -> 12 for step
-	 * Base - 7 lines with 6 points for line -> 42
+	 * Horizontal side - 4 lines X 6 coordinates per line -> 24 for step
+	 * Verticle side - 2 lines X 6 points per line -> 12 for step
+	 * Base - 7 lines X 6 points per line -> 42
 	 */
 	totPoints = 24 * numberOfSteps() + 12 * numberOfSteps() + 42;
 	GLfloat * vertices = new GLfloat[totPoints];
 
 	/* 
-	 * Base of a foot - 4 lines with 6 points for line -> 24 for step 
+	 * Horizontal side - 4 lines X 6 coordinates per line -> 24 for step 
 	 *       _
 	 *        _
 	 *         _
@@ -90,7 +90,7 @@ GLfloat * SimpleLadder::getVertices(GLfloat centerPosX, GLfloat centerPosY, GLfl
 	}
 
 	/*
-	 * Side of the foot - 2 lines with 6 points for line -> 12 for step 
+	 * Verticle side - 2 lines X 6 points per line -> 12 for step 
 	 *
 	 *        |
 	 *          |
@@ -143,7 +143,7 @@ GLfloat * SimpleLadder::getVertices(GLfloat centerPosX, GLfloat centerPosY, GLfl
 	vertices[pos++] = centerPosY - hight;
 	vertices[pos++] = centerPosZ - width;
 	/*
-	 * Base - 7 lines with 6 points for line -> 42
+	 * Base - 7 lines X 6 points per line -> 42
 	 * 
 	 *   |
 	 *    \
@@ -233,12 +233,11 @@ GLfloat * SimpleLadder::getVertices(GLfloat centerPosX, GLfloat centerPosY, GLfl
 	
 	return vertices;
 }
+
 ///
 ///
 /// Save ladder coordinates
 ///
-
-
 void SimpleLadder::save(std::string &fileName, GLfloat centerPosX, GLfloat centerPosY, GLfloat centerPosZ) const
 {
 	std::ofstream file(fileName.c_str());

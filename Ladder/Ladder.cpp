@@ -59,7 +59,7 @@ unsigned Ladder::numberOfSteps() const
 ///
 /// Calculate the number of steps
 ///
-void Ladder::setTheNumberOfSteps(double hightLadder, double hightStep)
+void Ladder::setTheNumberOfSteps(float hightLadder, float hightStep)
 {
 	m_numberOfSteps = (unsigned)(hightLadder / hightStep);
 }
